@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Eyal Ron",
+      "authorEmail": "eyal670@gmail.com",
+      "authorUrl": ""
+    }
+  }
+}
