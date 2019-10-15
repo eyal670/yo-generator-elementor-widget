@@ -10,7 +10,7 @@ module.exports = class extends Generator {
       {
         type: "input",
         name: "auth_name",
-        message: "Your name:"
+        message: "Author name:"
       },
       {
         type: "input",
@@ -21,6 +21,11 @@ module.exports = class extends Generator {
         type: "input",
         name: "widget_name",
         message: "Widget name:"
+      },
+      {
+        type: "input",
+        name: "plugin_prefix",
+        message: "Plugin prefix:"
       }
     ]);
   }
@@ -33,7 +38,8 @@ module.exports = class extends Generator {
         auth_name: this.answers.auth_name,
         plugin_name: capitalizeFirstLetter(
           spacing_name(this.answers.plugin_name)
-        )
+        ),
+        plugin_prefix: this.answers.plugin_prefix
       }
     );
     this.fs.copyTpl(
@@ -47,7 +53,9 @@ module.exports = class extends Generator {
       ),
       {
         auth_name: this.answers.auth_name,
-        widget_name: this.answers.widget_name
+        widget_name: this.answers.widget_name,
+        spaced_widget_name: spacing_name(this.answers.widget_name),
+        underlined_widget_name: underline_name(this.answers.widget_name)
       }
     );
   }
@@ -59,4 +67,8 @@ function capitalizeFirstLetter(string) {
 
 function spacing_name(str) {
   return str.replace(/\-/g, " ");
+}
+
+function underline_name(str) {
+  return str.replace(/\-/g, "_");
 }
