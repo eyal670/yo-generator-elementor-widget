@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * Main Modules class
  */
-class Modules {
+class <%= plugin_prefix %>_Modules {
 
     /**
      * @var Module_Base[]
@@ -53,4 +53,4 @@ class Modules {
         wp_enqueue_script( '<%= plugin_prefix %>-frontend-style', plugin_dir_url( __FILE__ ) . 'assets/js/main.js', array( 'jquery' ), filemtime( plugin_dir_path( __FILE__ ) .  'assets/js/main.js' ));
     }
 }
-Modules::get_instance()->init();
+<%= plugin_prefix %>_Modules::get_instance()->init();

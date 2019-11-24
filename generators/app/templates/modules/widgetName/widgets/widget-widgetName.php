@@ -8,9 +8,13 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Widget_<%= underlined_widget_name %> extends Widget_Base {
 
+	public function get_categories() {
+		return [ 'basic' ];
+	}
+
 	public function get_name() {
 
-		return '<%= widget_name %>';
+		return '<%= hyphen_lower_widget_name %>';
 	}
 
 	public function get_title() {

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 "use strict";
 const Generator = require("yeoman-generator");
 const chalk = require("chalk");
@@ -31,10 +32,14 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    // create main plugin php file
+    // Create main plugin php file
     this.fs.copyTpl(
       this.templatePath("pluginName.php"),
-      this.destinationPath(hyphen_name(this.answers.plugin_name) + "/" + hyphen_name(this.answers.plugin_name) + ".php "),
+      this.destinationPath(
+        hyphen_name(this.answers.plugin_name) +
+          "/" +
+          fileName(hyphen_name(this.answers.plugin_name), "php")
+      ),
       {
         auth_name: this.answers.auth_name,
         plugin_name: capitalizeFirstLetter(
@@ -45,7 +50,9 @@ module.exports = class extends Generator {
     );
     this.fs.copyTpl(
       this.templatePath("modules.php"),
-      this.destinationPath(hyphen_name(this.answers.plugin_name) + "/modules.php"),
+      this.destinationPath(
+        hyphen_name(this.answers.plugin_name) + "/modules.php"
+      ),
       {
         auth_name: this.answers.auth_name,
         plugin_name: capitalizeFirstLetter(
@@ -54,47 +61,55 @@ module.exports = class extends Generator {
         plugin_prefix: this.answers.plugin_prefix
       }
     );
-    // create css files
+    // Create css files
     this.fs.copyTpl(
       this.templatePath("assets/css/editor.css"),
-      this.destinationPath(hyphen_name(this.answers.plugin_name) + "/assets/css/editor.css"),
+      this.destinationPath(
+        hyphen_name(this.answers.plugin_name) + "/assets/css/editor.css"
+      ),
       {
-        auth_name: this.answers.auth_name,
+        auth_name: this.answers.auth_name
       }
     );
     this.fs.copyTpl(
       this.templatePath("assets/css/frontend.css"),
-      this.destinationPath(hyphen_name(this.answers.plugin_name) + "/assets/css/frontend.css"),
+      this.destinationPath(
+        hyphen_name(this.answers.plugin_name) + "/assets/css/frontend.css"
+      ),
       {
-        auth_name: this.answers.auth_name,
+        auth_name: this.answers.auth_name
       }
     );
 
-    // create js files
+    // Create js files
     this.fs.copyTpl(
       this.templatePath("assets/js/main.js"),
-      this.destinationPath(hyphen_name(this.answers.plugin_name) + "/assets/js/main.js"),
+      this.destinationPath(
+        hyphen_name(this.answers.plugin_name) + "/assets/js/main.js"
+      ),
       {
-        auth_name: this.answers.auth_name,
+        auth_name: this.answers.auth_name
       }
     );
 
-    // create widget main php file
+    // Create widget main php file
     this.fs.copyTpl(
       this.templatePath("modules/widgetName/widgets/widget-widgetName.php"),
       this.destinationPath(
         hyphen_name(this.answers.plugin_name) +
-        "/modules/" +
-        this.answers.widget_name +
-        "/widgets/widget-" +
-        hyphen_name(this.answers.plugin_name) +
-        ".php "
+          "/modules/" +
+          this.answers.widget_name +
+          "/widgets/widget-" +
+          fileName(hyphen_name(this.answers.plugin_name), "php")
       ),
       {
         auth_name: this.answers.auth_name,
         widget_name: this.answers.widget_name,
         spaced_widget_name: spacing_name(this.answers.widget_name),
-        underlined_widget_name: underline_name(this.answers.widget_name)
+        underlined_widget_name: underline_name(this.answers.widget_name),
+        hyphen_lower_widget_name: hyphen_name(
+          lowerCase(this.answers.widget_name)
+        )
       }
     );
   }
@@ -104,17 +119,25 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+function lowerCase(string) {
+  return string.charAt(0).toLowerCase() + string.slice(1);
+}
+
 function spacing_name(str) {
-  str = str.replace(/\_/g, "-");
-  return str.replace(/\-/g, " ");
+  str = str.replace(/_/g, "-");
+  return str.replace(/-/g, " ");
 }
 
 function underline_name(str) {
-  str = str.replace(/\ /g, "-");
-  return str.replace(/\-/g, "_");
+  str = str.replace(/ /g, "-");
+  return str.replace(/-/g, "_");
 }
 
 function hyphen_name(str) {
-  str = str.replace(/\_/g, "-");
-  return str.replace(/\ /g, "-");
+  str = str.replace(/_/g, "-");
+  return str.replace(/ /g, "-");
+}
+
+function fileName(name, ext) {
+  return name + "." + ext;
 }
