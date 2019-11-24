@@ -31,9 +31,10 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    // create main plugin php file
     this.fs.copyTpl(
       this.templatePath("pluginName.php"),
-      this.destinationPath(this.answers.plugin_name + ".php "),
+      this.destinationPath(hyphen_name(this.answers.plugin_name) + "/" + hyphen_name(this.answers.plugin_name) + ".php "),
       {
         auth_name: this.answers.auth_name,
         plugin_name: capitalizeFirstLetter(
@@ -43,13 +44,51 @@ module.exports = class extends Generator {
       }
     );
     this.fs.copyTpl(
+      this.templatePath("modules.php"),
+      this.destinationPath(hyphen_name(this.answers.plugin_name) + "/modules.php"),
+      {
+        auth_name: this.answers.auth_name,
+        plugin_name: capitalizeFirstLetter(
+          spacing_name(this.answers.plugin_name)
+        ),
+        plugin_prefix: this.answers.plugin_prefix
+      }
+    );
+    // create css files
+    this.fs.copyTpl(
+      this.templatePath("assets/css/editor.css"),
+      this.destinationPath(hyphen_name(this.answers.plugin_name) + "/assets/css/editor.css"),
+      {
+        auth_name: this.answers.auth_name,
+      }
+    );
+    this.fs.copyTpl(
+      this.templatePath("assets/css/frontend.css"),
+      this.destinationPath(hyphen_name(this.answers.plugin_name) + "/assets/css/frontend.css"),
+      {
+        auth_name: this.answers.auth_name,
+      }
+    );
+
+    // create js files
+    this.fs.copyTpl(
+      this.templatePath("assets/js/main.js"),
+      this.destinationPath(hyphen_name(this.answers.plugin_name) + "/assets/js/main.js"),
+      {
+        auth_name: this.answers.auth_name,
+      }
+    );
+
+    // create widget main php file
+    this.fs.copyTpl(
       this.templatePath("modules/widgetName/widgets/widget-widgetName.php"),
       this.destinationPath(
-        "modules/" +
-          this.answers.widget_name +
-          "/widgets/widget-" +
-          this.answers.widget_name +
-          ".php "
+        hyphen_name(this.answers.plugin_name) +
+        "/modules/" +
+        this.answers.widget_name +
+        "/widgets/widget-" +
+        hyphen_name(this.answers.plugin_name) +
+        ".php "
       ),
       {
         auth_name: this.answers.auth_name,
@@ -66,9 +105,16 @@ function capitalizeFirstLetter(string) {
 }
 
 function spacing_name(str) {
+  str = str.replace(/\_/g, "-");
   return str.replace(/\-/g, " ");
 }
 
 function underline_name(str) {
+  str = str.replace(/\ /g, "-");
   return str.replace(/\-/g, "_");
+}
+
+function hyphen_name(str) {
+  str = str.replace(/\_/g, "-");
+  return str.replace(/\ /g, "-");
 }
