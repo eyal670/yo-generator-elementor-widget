@@ -13,7 +13,7 @@ npm install -g yo
 npm link
 ```
 
-Then generate your new project:
+## Using
 
 ```bash
 yo elementor-widget
