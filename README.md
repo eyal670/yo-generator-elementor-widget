@@ -15,6 +15,7 @@ npm link
 
 ## Using
 
+run:
 ```bash
 yo elementor-widget
 ```
