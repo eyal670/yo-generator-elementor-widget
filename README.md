@@ -2,13 +2,15 @@
 
 First, install [Yeoman](http://yeoman.io) and generator-elementor-widget using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
-1. install yeoman
+1. clone this generator to your local machine
+
+2. install yeoman globally
 ```bash
 npm install -g yo
 ```
-2. from your generator folder run:
+3. from your generator folder run:
 ```bash
-npm install -g generator-elementor-widget
+npm link
 ```
 
 Then generate your new project:
