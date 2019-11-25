@@ -2,8 +2,12 @@
 
 First, install [Yeoman](http://yeoman.io) and generator-elementor-widget using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
+1. install yeoman
 ```bash
 npm install -g yo
+```
+2. from your generator folder run:
+```bash
 npm install -g generator-elementor-widget
 ```
 
@@ -12,6 +16,11 @@ Then generate your new project:
 ```bash
 yo elementor-widget
 ```
+or
+```bash
+yo
+```
+and select your generator
 
 ## Getting To Know Yeoman
 
