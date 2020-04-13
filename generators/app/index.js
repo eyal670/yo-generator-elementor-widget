@@ -37,8 +37,8 @@ module.exports = class extends Generator {
       this.templatePath("pluginName.php"),
       this.destinationPath(
         hyphen_name(this.answers.plugin_name) +
-          "/" +
-          fileName(hyphen_name(this.answers.plugin_name), "php")
+        "/" +
+        fileName(hyphen_name(this.answers.plugin_name), "php")
       ),
       {
         auth_name: this.answers.auth_name,
@@ -97,10 +97,10 @@ module.exports = class extends Generator {
       this.templatePath("modules/widgetName/widgets/widget-widgetName.php"),
       this.destinationPath(
         hyphen_name(this.answers.plugin_name) +
-          "/modules/" +
-          this.answers.widget_name +
-          "/widgets/widget-" +
-          fileName(hyphen_name(this.answers.plugin_name), "php")
+        "/modules/" +
+        this.answers.widget_name +
+        "/widgets/widget-" +
+        fileName(hyphen_name(this.answers.widget_name), "php")
       ),
       {
         auth_name: this.answers.auth_name,
